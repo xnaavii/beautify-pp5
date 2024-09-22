@@ -20,7 +20,7 @@
             {% endif %}
 
             <a href="{% url 'service_list' %}" class="btn btn-lg btn-light mt-4"><i class="fa-solid fa-arrow-left"></i> Back To Services</a>
-            <a href="#" class="btn btn-service btn-lg mt-4"><i class="fa-regular fa-calendar"></i> Book Now</a>
+            <a href="{% url 'book_appointment' service.id %}" class="btn btn-service btn-lg mt-4"><i class="fa-regular fa-calendar"></i> Book Now</a>
         </div>
     </div>
 </div>
