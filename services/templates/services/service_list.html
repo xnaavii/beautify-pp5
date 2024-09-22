@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Our Services</h1>
+    
+    {% for category in categories %}
+        <h2 class="mt-4">{{ category.name }}</h2>
+        <ul class="list-group mb-4">
+            {% for service in services %}
+                {% if service.category == category %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>{{ service.name }}</strong> - €{{ service.price }}
+                            <p class="mb-1">{{ service.description }}</p>
+                        </div>
+                        <a href="#" class="btn btn-service">View Details</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</div>
+{% endblock %}

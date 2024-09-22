@@ -1,0 +1,56 @@
+body {
+    background-color: rgba(255, 192, 203, 0.9) !important; /* Override bootstrap */
+}
+
+.container {
+    background-color: white; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #d63384 !important; /* Override bootstrap */
+}
+
+.list-group-item {
+    border: none !important; /* Override bootstrap */
+}
+
+.list-group-item:hover {
+    background-color: rgba(255, 192, 203, 0.7);
+}
+
+/* Service page button */
+
+.btn-service {
+    background-color: #c72c77; 
+    color: white; 
+    border: none; 
+}
+
+.btn-service:hover {
+    background-color: #b21d5a; 
+    color: white; 
+}
+
+/* Navbar */
+
+.navbar {
+    background-color: rgba(255, 192, 203, 0.9);
+    border-bottom: 2px solid #d63384;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+
+.navbar .nav-link {
+    color: #d63384;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.navbar .nav-link:hover {
+    color: #c72c77;
+    background-color: rgba(255, 192, 203, 0.5);
+    
+}
