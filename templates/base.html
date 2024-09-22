@@ -65,24 +65,23 @@
                 <ul class="navbar-nav ml-auto">
                   {% if user.is_authenticated %}
                   <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i> Cart</a>
+                    <a class="nav-link {% if request.path == "/accounts/logout/" %}active{% endif %}" href="{% url 'account_logout'%}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_logout'%}">Logout</a>
+                    <a class="nav-link" href="#"><i class="fa-regular fa-user fa-lg"></i> Profile</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
+                    <a class="nav-link" href="#"><i class="fas fa-shopping-cart fa-lg"></i> Cart</a>
                   </li>
                   {% else %}
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                    <a class="nav-link {% if request.path == "/accounts/login/" %}active{% endif %} " href="{% url 'account_login' %}"><i class="fa-solid fa-right-to-bracket fa-lg"></i> Login</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a>
+                    <a class="nav-link {% if request.path == "/accounts/signup/" %}active{% endif %} " href="{% url 'account_signup' %}"><i class="fa-regular fa-user fa-lg"></i> Sign Up</a>
                   </li>
                   {% endif %}
                 </ul>
-                
               </div>
             </div>
           </nav>

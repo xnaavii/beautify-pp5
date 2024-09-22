@@ -12,10 +12,12 @@
                 {% if service.category == category %}
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <div>
-                            <strong>{{ service.name }}</strong> - €{{ service.price }}
-                            <p class="mb-1">{{ service.description }}</p>
+                            <strong>{% if service.category.name == 'Hair' %}<i class="fa-solid fa-scissors"></i>
+                            {% elif service.category.name == 'Nails' %}<i class="fa-solid fa-wand-magic-sparkles"></i>
+                            {% endif %} {{ service.name }}</strong> - €{{ service.price }}
+                            <p class="mb-1">{{ service.description|truncatewords:20 }}</p>
                         </div>
-                        <a href="#" class="btn btn-service">View Details</a>
+                        <a href="{% url 'service_detail' service.id %}" class="btn btn-service">View Details</a>
                     </li>
                 {% endif %}
             {% endfor %}
