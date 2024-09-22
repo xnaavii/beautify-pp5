@@ -1,10 +1,13 @@
-{% extends "account/base_entrance.html" %}
+{% extends "base.html" %}
 {% load i18n %}
 {% load allauth account %}
 {% block head_title %}
     {% trans "Sign In" %}
 {% endblock head_title %}
 {% block content %}
+<main class="container">
+    <div class="row justify-content-center mt-3">
+    <div class="col-md-6 col-sm-12">
     {% element h1 %}
         {% trans "Sign In" %}
     {% endelement %}
@@ -27,9 +30,9 @@
                 {{ redirect_field }}
             {% endslot %}
             {% slot actions %}
-                {% element button type="submit" tags="prominent,login" %}
+                <button type="submit" tags="prominent,login" class="btn btn-outline-dark">
                     {% trans "Sign In" %}
-                {% endelement %}
+                </button>
             {% endslot %}
         {% endelement %}
     {% endif %}
@@ -58,4 +61,7 @@
     {% if PASSKEY_LOGIN_ENABLED %}
         {% include "mfa/webauthn/snippets/login_script.html" with button_id="passkey_login" %}
     {% endif %}
-{% endblock %}
+    {% endblock %}
+</div>
+</div>
+</main>

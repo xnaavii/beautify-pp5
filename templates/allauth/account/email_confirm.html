@@ -1,4 +1,4 @@
-{% extends "account/base_entrance.html" %}
+{% extends "base.html" %}
 {% load i18n %}
 {% load account %}
 {% load allauth %}
@@ -6,6 +6,9 @@
     {% trans "Confirm Email Address" %}
 {% endblock head_title %}
 {% block content %}
+<main class="container">
+    <div class="row justify-content-center mt-3">
+    <div class="col-md-6 col-sm-12">
     {% element h1 %}
         {% trans "Confirm Email Address" %}
     {% endelement %}
@@ -36,4 +39,7 @@
             {% blocktrans %}This email confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new email confirmation request</a>.{% endblocktrans %}
         {% endelement %}
     {% endif %}
+</div>
+</div>
+</main>
 {% endblock content %}
