@@ -8,6 +8,6 @@
     <p>Notes: <strong>{{ appointment.notes }}</strong></p>
     {% endif %}
     <a href="{% url 'home' %}" class="btn btn btn-light"><i class="fa-solid fa-house"></i> Return to Home</a>
-    <a href="#" class="btn btn btn-service"><i class="fa-regular fa-calendar-check"></i> View Appointments</a>
+    <a href="{% url 'upcoming_appointments' %}" class="btn btn btn-service"><i class="fa-regular fa-calendar-check"></i> View Appointments</a>
 </div>
 {% endblock %}

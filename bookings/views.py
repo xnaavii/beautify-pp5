@@ -29,5 +29,24 @@ def book_appointment(request, service_id):
 @login_required
 def booking_success(request, appointment_id):
     """A view to redirect user to the booking successful page"""
+    
     appointment = get_object_or_404(Appointment, id=appointment_id)
-    return render(request, "bookings/booking_success.html", {"appointment": appointment})
+    template = "bookings/booking_success.html"
+    context = {"appointment": appointment}
+    
+    return render(request, template, context )
+
+
+@login_required
+def upcoming_appointments(request):
+    """A view to display user's upcoming appointments and handle cancellations."""
+    appointments = Appointment.objects.filter(user=request.user).order_by('appointment_date')
+
+    if request.method == 'POST':
+        appointment_id = request.POST.get('appointment_id')
+        appointment = get_object_or_404(Appointment, id=appointment_id, user=request.user)
+        appointment.delete()
+        messages.success(request, "Your appointment has been cancelled successfully!")
+        return redirect('upcoming_appointments')
+
+    return render(request, 'bookings/upcoming_appointments.html', {'appointments': appointments})

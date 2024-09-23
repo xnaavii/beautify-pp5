@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Your Upcoming Appointments</h2>
+    {% if appointments %}
+        <ul class="list-group">
+            {% for appointment in appointments %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>{{ appointment.service.name }}</strong> 
+                        <span class="text-muted">on {{ appointment.appointment_date|date:"F j, Y, g:i a" }}</span>
+                    </div>
+                    <button class="btn btn-danger btn-sm cancel-btn" data-id="{{ appointment.id }}">
+                        <i class="fa-solid fa-trash-alt"></i> Cancel
+                    </button>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have no upcoming appointments.</p>
+        <a class="btn btn-service btn-sm" href="{% url 'service_list' %}">
+            <i class="fa-solid fa-magnifying-glass"></i> Browse Services
+        </a>
+    {% endif %}
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelModalLabel">Cancel Appointment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to cancel this appointment?
+            </div>
+            <div class="modal-footer">
+                <form id="cancelForm" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="appointment_id" id="appointmentId">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Confirm Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cancelBtns = document.querySelectorAll('.cancel-btn');
+        const cancelForm = document.getElementById('cancelForm');
+        const appointmentIdInput = document.getElementById('appointmentId');
+
+        cancelBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const appointmentId = this.getAttribute('data-id');
+                appointmentIdInput.value = appointmentId;
+                const modal = new bootstrap.Modal(document.getElementById('cancelModal'));
+                modal.show();
+            });
+        });
+    });
+</script>
+{% endblock %}
