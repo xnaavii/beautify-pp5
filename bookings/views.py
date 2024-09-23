@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from services.models import Service
+from .models import Appointment
 from .forms import AppointmentForm
 from django.contrib.auth.decorators import login_required
 
@@ -9,18 +10,24 @@ def book_appointment(request, service_id):
     service = get_object_or_404(Service, id=service_id)
     
     if request.method == 'POST':
-        form = AppointmentForm(request.POST, service=service)  # Pass the service to the form
+        form = AppointmentForm(request.POST)
         if form.is_valid():
             appointment = form.save(commit=False)
-            appointment.user = request.user  # Assign the authenticated user
+            appointment.user = request.user
             appointment.service = service
             appointment.save()
             messages.success(request, "Your appointment has been booked successfully!")
-            return redirect('home')  # Redirect to an appropriate page after booking
+            return redirect('booking_success', appointment_id=appointment.id)
+        else:
+            print("Form errors:", form.errors)  # Output form errors
     else:
-        form = AppointmentForm(service=service)  # Pass the service for pre-filling
+        form = AppointmentForm()
 
-    template = 'bookings/book_appointment.html'
     context = {'form': form, 'service': service}
+    return render(request, 'bookings/book_appointment.html', context)
 
-    return render(request, template, context)
+@login_required
+def booking_success(request, appointment_id):
+    """A view to redirect user to the booking successful page"""
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+    return render(request, "bookings/booking_success.html", {"appointment": appointment})

@@ -17,7 +17,7 @@
                             {% endif %} {{ service.name }}</strong> - €{{ service.price }}
                             <p class="mb-1">{{ service.description|truncatewords:20 }}</p>
                         </div>
-                        <a href="{% url 'service_detail' service.id %}" class="btn btn-service">View Details</a>
+                        <a href="{% url 'service_detail' service.id %}" class="btn btn-lg btn-service">View Details</a>
                     </li>
                 {% endif %}
             {% endfor %}

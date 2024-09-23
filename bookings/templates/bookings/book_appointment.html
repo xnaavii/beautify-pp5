@@ -3,11 +3,28 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h1>Book Appointment for {{ service.name }}</h1>
+    <h2 class="text-center mb-4">Book Appointment for {{ service.name }}</h2>
+    
+    <div class="alert alert-info">
+        <h4 class="mb-1"><i class="fa-regular fa-envelope fa-sm"></i> Your Email: {{ request.user.email }}</h4>
+    </div>
+    
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Service Details</h5>
+            <p class="lead"><strong>Price:</strong> €{{ service.price }}</p>
+            <p class="lead"><strong>Description:</strong> {{ service.description }}</p>
+        </div>
+    </div>
+    
     <form method="post">
         {% csrf_token %}
-        {% crispy form %}
-        <button type="submit" class="btn btn-service">Confirm Booking</button>
+        {{ form|crispy }}
+        <div class="text-center">
+            <button type="submit" class="btn btn-service btn-lg">
+                Confirm Booking <i class="fa-solid fa-check"></i>
+            </button>
+        </div>
     </form>
 </div>
 {% endblock %}

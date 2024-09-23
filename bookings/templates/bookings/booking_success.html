@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5 text-center">
+    <h1>Booking Successful!</h1>    
+    <p>Your appointment for <strong>{{ appointment.service.name }}</strong> has been booked successfully.</p>
+    <p>Appointment Date and Time: <strong>{{ appointment.appointment_date }}</strong></p>
+    {% if appointment.notes %}
+    <p>Notes: <strong>{{ appointment.notes }}</strong></p>
+    {% endif %}
+    <a href="{% url 'home' %}" class="btn btn btn-light"><i class="fa-solid fa-house"></i> Return to Home</a>
+    <a href="#" class="btn btn btn-service"><i class="fa-regular fa-calendar-check"></i> View Appointments</a>
+</div>
+{% endblock %}
