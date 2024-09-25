@@ -9,7 +9,8 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div>
                         <strong>{{ appointment.service.name }}</strong> 
-                        <span class="text-muted">on {{ appointment.appointment_date|date:"F j, Y, g:i a" }}</span>
+                        <span class="text-muted">on {{ appointment.date|date:"F j, Y" }}</span>
+                        <span class="text-muted">at {{appointment.time|time:"g:i a"}}</span>
                     </div>
                     <button class="btn btn-danger btn-sm cancel-btn" data-id="{{ appointment.id }}">
                         <i class="fa-solid fa-trash-alt"></i> Cancel

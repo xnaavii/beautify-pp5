@@ -40,7 +40,7 @@ def booking_success(request, appointment_id):
 @login_required
 def upcoming_appointments(request):
     """A view to display user's upcoming appointments and handle cancellations."""
-    appointments = Appointment.objects.filter(user=request.user).order_by('appointment_date')
+    appointments = Appointment.objects.filter(user=request.user).order_by('date')
 
     if request.method == 'POST':
         appointment_id = request.POST.get('appointment_id')
